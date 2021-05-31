@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-05-31 13:54:53 / Modified: 21:54:13" itemprop="dateCreated datePublished" datetime="2021-05-31T13:54:53+08:00">2021-05-31</time>
+      <time title="Created: 2021-05-31 13:54:53 / Modified: 22:25:42" itemprop="dateCreated datePublished" datetime="2021-05-31T13:54:53+08:00">2021-05-31</time>
     </span>
 
   
@@ -216,30 +216,14 @@
     <div class="post-body" itemprop="articleBody">
           <ul>
 <li><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>数字签名可以确保文件数据的完整性以及不可抵赖性。本次将使用Java语言来实现对文件的数字签名及验证，Java语言的JDK提供了丰富的密码学类库。本次采用了椭圆曲线ECDSA数字签名算法及SHA256散列算法，也可以通过简单的参数选取，使用SHA或其他签名算法。</p>
-</li>
-<li><h3 id="环境及设备"><a href="#环境及设备" class="headerlink" title="环境及设备"></a>环境及设备</h3><p>Windows计算机一台，Java虚拟机 JDK 1.6 及以上版本。</p>
-</li>
-<li><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li><p>将一个计算机中的文件中的所有内容读取到字节数组bytes中，需要保证计算机中存在这个文件。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] bytes = &#123;&#125;;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">//获取计算机中文件名 d:\\test.txt的路径</span></span><br><span class="line">	Path path = Paths.get(<span class="string">&quot;d:\\test.txt&quot;</span>);</span><br><span class="line">			</span><br><span class="line">	<span class="comment">//从文件读取内容到字节数组byte[]中</span></span><br><span class="line">	bytes = Files.readAllBytes(path);</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;文件读取错误&quot;</span> + e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>使用椭圆曲线签名算法，需要先得到椭圆曲线签名算法 EC 的生成密钥类 KeyPairGenerator 的一个实例 keyPairGen, 然后初始化 keyPairGen，对于椭圆曲线算法，密钥长度最低为112，生成一对密钥，其中包括了公钥和私钥，存入对象 pair 中，并以十六进制方式输出私钥的内容。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用椭圆曲线签名算法，需要得到椭圆曲线算法的密钥生成一个实例keyPairGen</span></span><br><span class="line">KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(<span class="string">&quot;EC&quot;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//初始化密钥对生成器，对椭圆曲线算法，参数最低为112</span></span><br><span class="line">keyPairGen.initialize(<span class="number">112</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//生成一对密钥，其中包括公钥和私钥，存入对象pair中；</span></span><br><span class="line">KeyPair pair = keyPairGen.generateKeyPair();</span><br><span class="line">		</span><br><span class="line"><span class="comment">//从pair中获取私钥</span></span><br><span class="line">PrivateKey privKey = pair.getPrivate();</span><br><span class="line">		</span><br><span class="line"><span class="comment">//输出私钥内容</span></span><br><span class="line"><span class="keyword">byte</span>[] bytePrivKey = privKey.getEncoded();</span><br><span class="line">String strPrivKey = DatatypeConverter.printHexBinary(bytePrivKey);</span><br><span class="line">System.out.printf(<span class="string">&quot;私钥:0x%s\n&quot;</span>,strPrivKey);</span><br></pre></td></tr></table></figure></li>
-<li><p>从对象pair中获取公钥，以十六进制方式输出公钥的内容。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从pair中获取公钥</span></span><br><span class="line">PublicKey pubKey = pair.getPublic();</span><br><span class="line"><span class="comment">//输出公钥字节内容</span></span><br><span class="line"><span class="keyword">byte</span>[] bytePubKey = pubKey.getEncoded();</span><br><span class="line">String strPubKey = DatatypeConverter.printHexBinary(bytePubKey);</span><br><span class="line">System.out.printf(<span class="string">&quot;公钥：0x%s\n&quot;</span>,strPubKey);</span><br></pre></td></tr></table></figure></li>
-<li><p>创建一个签名对象 sign。使用 SHA256 算法作为散列函数，椭圆曲线签名算法 ECDSA 作为签名算法。用私钥 pairKry 来初始化签名对象 sign。然后使用签名对象 sign 的 update 方法加载需要签名的字节数组的内容 bytes，再使用 sign 方法生成签名；以十六进制字节方法打印  bytes 的签名值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个签名对象sign，使用SHA256算法作为散列函数，椭圆曲线签名算法ECDSA作为签名算法</span></span><br><span class="line">Signature sign = Signature.getInstance(<span class="string">&quot;SHA256withECDSA&quot;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//用私钥privKey来初始化签名对象sign</span></span><br><span class="line">sign.initSign(privKey);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//签名对象sign加载需要签名的字节数组内容bytes</span></span><br><span class="line">sign.update(bytes);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//生成签名</span></span><br><span class="line"><span class="keyword">byte</span>[] signature = sign.sign();</span><br><span class="line">		</span><br><span class="line"><span class="comment">//以十六进制字节方式打印出bytes的签名值</span></span><br><span class="line">String strSign = DatatypeConverter.printHexBinary(signature);</span><br><span class="line">System.out.printf(<span class="string">&quot;签名内容:0x%s\n&quot;</span>,strSign);</span><br></pre></td></tr></table></figure></li>
-<li><p>使用公钥 pubKey 对签名进行验证。创建一个签名对象 veriSign ，使用 SHA256 算法作为散列函数，椭圆曲线签名算法 ECDSA 作为签名算法。使用公钥 pubKey 来初始化签名对象 VeriSign ，签名对象VeriSign 加载需要验证签名的字节数组内容 bytes。VeriSign 使用公钥 pubKey 对 bytes 进行验证。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用公钥pubKey对签名进行验证</span></span><br><span class="line">System.out.println(<span class="string">&quot;正在验证，请稍等------&quot;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//创建一个签名对象veriSign,使用SHA256算法作为散列函数，椭圆曲线签名算法ECDSA作为签名算法</span></span><br><span class="line">Signature veriSign = Signature.getInstance(<span class="string">&quot;SHA256withECDSA&quot;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//使用公钥pubKey来初始化签名对象VeriSign</span></span><br><span class="line">veriSign.initVerify(pubKey);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//签名对象veriSign加载需要验证签名的字节数组的内容bytes</span></span><br><span class="line">veriSign.update(bytes);;</span><br><span class="line">		</span><br><span class="line"><span class="comment">//签名对象veriSign使用公钥pubKey对bytes的签名signature进行验证</span></span><br><span class="line"><span class="keyword">boolean</span> ok = veriSign.verify(signature);</span><br><span class="line"><span class="keyword">if</span>(ok)</span><br><span class="line">	System.out.println(<span class="string">&quot;验证成功，签名正确！&quot;</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	System.out.println(<span class="string">&quot;验证失败，签名不正确！&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>若签名验证成功，则打印 “验证成功，签名正确！”，否则打印出 “验证失败，签名不正确！”。</p>
-</li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> digitalsignature;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Path;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPair;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPairGenerator;</span><br><span class="line"><span class="keyword">import</span> java.security.PrivateKey;</span><br><span class="line"><span class="keyword">import</span> java.security.PublicKey;</span><br><span class="line"><span class="keyword">import</span> java.security.Signature;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.DatatypeConverter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> renhongchang</span></span><br><span class="line"><span class="comment">* <span class="doctag">@version</span> 创建时间：2021年5月31日 下午2:57:08 </span></span><br><span class="line"><span class="comment">* <span class="doctag">@blog</span> https://rhc-rgb.github.io</span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* 随计算机中的一个文件使用椭圆曲线算法生成数字签名</span></span><br><span class="line"><span class="comment">* 然后对该文件的数字签名进行验证</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitalSignature</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = &#123;&#125;;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//获取计算机中文件名 d:\\test.txt的路径</span></span><br><span class="line">			Path path = Paths.get(<span class="string">&quot;d:\\test.txt&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//从文件读取内容到字节数组byte[]中</span></span><br><span class="line">			bytes = Files.readAllBytes(path);</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;文件读取错误&quot;</span> + e);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//使用椭圆曲线签名算法，需要得到椭圆曲线算法的密钥生成一个实例keyPairGen</span></span><br><span class="line">		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(<span class="string">&quot;EC&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//初始化密钥对生成器，对椭圆曲线算法，参数最低为112</span></span><br><span class="line">		keyPairGen.initialize(<span class="number">112</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//生成一对密钥，其中包括公钥和私钥，存入对象pair中；</span></span><br><span class="line">		KeyPair pair = keyPairGen.generateKeyPair();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//从pair中获取私钥</span></span><br><span class="line">		PrivateKey privKey = pair.getPrivate();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出私钥内容</span></span><br><span class="line">		<span class="keyword">byte</span>[] bytePrivKey = privKey.getEncoded();</span><br><span class="line">		String strPrivKey = DatatypeConverter.printHexBinary(bytePrivKey);</span><br><span class="line">		System.out.printf(<span class="string">&quot;私钥:0x%s\n&quot;</span>,strPrivKey);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//从pair中获取公钥</span></span><br><span class="line">		PublicKey pubKey = pair.getPublic();</span><br><span class="line">		<span class="comment">//输出公钥字节内容</span></span><br><span class="line">		<span class="keyword">byte</span>[] bytePubKey = pubKey.getEncoded();</span><br><span class="line">		String strPubKey = DatatypeConverter.printHexBinary(bytePubKey);</span><br><span class="line">		System.out.printf(<span class="string">&quot;公钥：0x%s\n&quot;</span>,strPubKey);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建一个签名对象sign，使用SHA256算法作为散列函数，椭圆曲线签名算法ECDSA作为签名算法</span></span><br><span class="line">		Signature sign = Signature.getInstance(<span class="string">&quot;SHA256withECDSA&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//用私钥privKey来初始化签名对象sign</span></span><br><span class="line">		sign.initSign(privKey);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//签名对象sign加载需要签名的字节数组内容bytes</span></span><br><span class="line">		sign.update(bytes);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//生成签名</span></span><br><span class="line">		<span class="keyword">byte</span>[] signature = sign.sign();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//以十六进制字节方式打印出bytes的签名值</span></span><br><span class="line">		String strSign = DatatypeConverter.printHexBinary(signature);</span><br><span class="line">		System.out.printf(<span class="string">&quot;签名内容:0x%s\n&quot;</span>,strSign);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//使用公钥pubKey对签名进行验证</span></span><br><span class="line">		System.out.println(<span class="string">&quot;正在验证，请稍等------&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建一个签名对象veriSign,使用SHA256算法作为散列函数，椭圆曲线签名算法ECDSA作为签名算法</span></span><br><span class="line">		Signature veriSign = Signature.getInstance(<span class="string">&quot;SHA256withECDSA&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//使用公钥pubKey来初始化签名对象VeriSign</span></span><br><span class="line">		veriSign.initVerify(pubKey);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//签名对象veriSign加载需要验证签名的字节数组的内容bytes</span></span><br><span class="line">		veriSign.update(bytes);;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//签名对象veriSign使用公钥pubKey对bytes的签名signature进行验证</span></span><br><span class="line">		<span class="keyword">boolean</span> ok = veriSign.verify(signature);</span><br><span class="line">		<span class="keyword">if</span>(ok)</span><br><span class="line">			System.out.println(<span class="string">&quot;验证成功，签名正确！&quot;</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(<span class="string">&quot;验证失败，签名不正确！&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><h3 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">私钥:0x302C020100301006072A8648CE3D020106052B8104000604153013020101040EAE0831C7D9E7F76ADF8A0B08D1DF</span><br><span class="line">公钥：0x3032301006072A8648CE3D020106052B81040006031E0004050A0BCE147FF9BFDDA2FD06BD748B983B600DD605296822BD59E317</span><br><span class="line">签名内容:0x3020020E3CBFF953DC7C15041DDC01A56704020E51949B5868C2123534E39ABA2F03</span><br><span class="line">正在验证，请稍等------</span><br><span class="line">验证成功，签名正确！</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/31/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E5%BA%94%E7%94%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -296,7 +280,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-31 01:45:09" itemprop="dateModified" datetime="2021-05-31T01:45:09+08:00">2021-05-31</time>
+        <time title="Modified: 2021-05-31 22:23:58" itemprop="dateModified" datetime="2021-05-31T22:23:58+08:00">2021-05-31</time>
       </span>
 
   
@@ -324,356 +308,14 @@
 <li><p>三元运算符</p>
 </li>
 </ol>
-<ul>
-<li><h3 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h3></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AriTest</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//除号</span></span><br><span class="line">		<span class="keyword">int</span> num1 = <span class="number">12</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">int</span> result1 = num1 / num2;</span><br><span class="line">		System.out.println(result1); <span class="comment">// 2 </span></span><br><span class="line">	</span><br><span class="line">        <span class="keyword">int</span> result2 = num1 / num2 * num2;</span><br><span class="line">		System.out.println(result2); <span class="comment">// 10</span></span><br><span class="line">	</span><br><span class="line">        <span class="keyword">double</span> result3 = num1 / num2;</span><br><span class="line">		System.out.println(result3); <span class="comment">// 2.0</span></span><br><span class="line">	</span><br><span class="line">        <span class="keyword">double</span> result4 = num1 / num2 + <span class="number">0.0</span>; <span class="comment">// 2.0</span></span><br><span class="line">		<span class="keyword">double</span> result5 = num1 / (num2 + <span class="number">0.0</span>); <span class="comment">//2.4</span></span><br><span class="line">		System.out.println(result5);</span><br><span class="line">	</span><br><span class="line">        <span class="keyword">double</span> result6 = (<span class="keyword">double</span>)num1 / num2; <span class="comment">// 2.4</span></span><br><span class="line">		System.out.println(result6);</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">        <span class="comment">// % 取摸运算</span></span><br><span class="line">        <span class="comment">//结果的符号和被模数的符号相同</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> m1 = <span class="number">12</span>;</span><br><span class="line">		<span class="keyword">int</span> n1 = <span class="number">5</span>;</span><br><span class="line">		System.out.println(m1 % n1); <span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> m2 = -<span class="number">12</span>;</span><br><span class="line">		<span class="keyword">int</span> n2 = <span class="number">5</span>；</span><br><span class="line">        System.out.println(m2 % n2); <span class="comment">// -2</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> m3 = <span class="number">12</span>;</span><br><span class="line">        <span class="keyword">int</span> n3 = -<span class="number">5</span>;</span><br><span class="line">        System.out.println(m3 % n3); <span class="comment">// 2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> m4 = -<span class="number">12</span>;</span><br><span class="line">        <span class="keyword">int</span> n4 = -<span class="number">5</span>;</span><br><span class="line">        System.out.println(m4 % n4); <span class="comment">// -2</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//自加运算</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//（前）++ 先自增1，再运算 </span></span><br><span class="line">        <span class="comment">//(后) ++ 先运算，在自增1 </span></span><br><span class="line">        <span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b1 = ++a1;</span><br><span class="line">        System.out.println(<span class="string">&quot;a1 = &quot;</span> + a1 + <span class="string">&quot;,b1 = &quot;</span> + b1); <span class="comment">// b1 = 11</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> a2 = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b2 = a2++;</span><br><span class="line">        System.out.println(<span class="string">&quot;a2 = &quot;</span> + a2 + <span class="string">&quot;,b2 = &quot;</span> + b1);  <span class="comment">//b2 = 10</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> a3 = <span class="number">10</span>;</span><br><span class="line">        a3++;</span><br><span class="line">        <span class="comment">//++a3;</span></span><br><span class="line">        <span class="keyword">int</span> b3 = a3;   <span class="comment">//b3 = 11</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//(前) -- 先自减1，再运算</span></span><br><span class="line">        <span class="comment">//(后) -- 先运算，再自减1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    经常使用取模运算来判断是否能被除尽的情况；</p>
-<p>注意点：</p>
-<p>==自增自减运算不会改变数据自身的数据类型==</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a1 = <span class="number">10</span>;</span><br><span class="line">a1 = a1 + <span class="number">1</span>;  <span class="comment">//数据类型自动提升为int型，编译失败</span></span><br><span class="line">a1 = (<span class="keyword">short</span>)(a1 + <span class="number">1</span>);   <span class="comment">//强制类型转换，正确的</span></span><br><span class="line">a1++;   <span class="comment">//自增自减不会改变数据自身的数据类型</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>练习：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">随意给出一个整数，打印显示他的个位数，十位数，百位数的值</span></span><br><span class="line"><span class="comment">格式如下：</span></span><br><span class="line"><span class="comment">数字xxx的情况如下：</span></span><br><span class="line"><span class="comment">个位数：</span></span><br><span class="line"><span class="comment">十位数：</span></span><br><span class="line"><span class="comment">百位数：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">例如：数字153的情况如下：</span></span><br><span class="line"><span class="comment">个位数：3</span></span><br><span class="line"><span class="comment">十位数：5</span></span><br><span class="line"><span class="comment">百位数：1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AriExer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//实例化一个从键盘输入的对象</span></span><br><span class="line">        Scanner re = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//从键盘输入一个整数</span></span><br><span class="line">        <span class="keyword">int</span> num = re.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//计算百位数</span></span><br><span class="line">        <span class="keyword">int</span> hundredDigits = num / <span class="number">100</span>;</span><br><span class="line">        <span class="comment">//计算十位数</span></span><br><span class="line">        <span class="keyword">int</span> tenDigits = num / <span class="number">10</span> - hundredDigits * <span class="number">10</span>; <span class="comment">//int tenDigits = num % 100 / 10; //int tenDigits = num / 10 % 10;</span></span><br><span class="line">        <span class="comment">//计算个位数</span></span><br><span class="line">        <span class="keyword">int</span> single = num % <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;数字&quot;</span> + num + <span class="string">&quot;的情况如下：&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;个位数：&quot;</span> + single);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;十位数：&quot;</span> + tenDigits);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;百位数：&quot;</span> + hundredDigits);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><ul>
-<li><p><strong>符号 ”=“</strong></p>
-<p> 当”=“两侧数据类型不一致时，可以使用自动类型转换或者强制类型转换原则进行处理。</p>
-<p>==支持连续赋值==</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> j1 = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i2,j2;</span><br><span class="line">i2 = j2 = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>*<em>扩展赋值运算符：+=, -= , <em>=, /=, %=</em></em></p>
-</li>
-</ul>
-</li>
-</ul>
-<p>​    注意点：</p>
-<p>​        ==赋值运算符的拓展运算符也不会改变数据自身的数据类型。==</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a = <span class="number">10</span>;</span><br><span class="line">a = a + <span class="number">2</span>;  <span class="comment">//编译错误，a + 2 的结果为int型</span></span><br><span class="line">a += <span class="number">2</span>;  <span class="comment">//值为12，编译成功</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>练习1：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">i *= <span class="number">0.1</span>;    <span class="comment">//*=不会改变数据自身的数据类型，所以编译成功</span></span><br><span class="line">System.out.println(i);  <span class="comment">//0</span></span><br><span class="line">i++;</span><br><span class="line">System.out.println(i);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
-
-<p>练习2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">3</span>;</span><br><span class="line">n *= m++;</span><br><span class="line">System.out.println(<span class="string">&quot;m = &quot;</span> + m); <span class="comment">//3</span></span><br><span class="line">System.out.println(<span class="string">&quot;n = &quot;</span> + n); <span class="comment">//6</span></span><br></pre></td></tr></table></figure>
-
-<p>练习3：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">n += (n++) + (++n);   <span class="comment">//实际开发中不建议这种写法</span></span><br><span class="line">System.out.println(n);  <span class="comment">//32</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>开发中，希望变量实现 +2 的操作，实现方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<p>方式一：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num += <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>方式二：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = num + <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><ul>
-<li><p>比较运算符的结果都是boolean类型，要么是true，要么就是false。</p>
-</li>
-<li><p><strong>比较运算符”==”不能写成”=”</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(i == j); <span class="comment">//false</span></span><br><span class="line">System.out.println(i = j); <span class="comment">//10</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>运算符</strong>：==, !=, &lt;, &gt;, &lt;=, &gt;=, instanceof(检查是否是类的对象)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Hello&quot;</span> <span class="keyword">instanceof</span> String  <span class="comment">//true</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>思考：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> b1 = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">boolean</span> b2 = <span class="keyword">false</span>;</span><br><span class="line">System.out.println(b1 == b2); <span class="comment">//false</span></span><br><span class="line">System.out.println(b2 = b1); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>&amp;  ——逻辑与；    | ——逻辑或；    ! ——逻辑非；    &amp;&amp; ——短路与；    || ——短路或；    ^ ——逻辑异或</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">a</th>
-<th align="center">b</th>
-<th align="center">a&amp;b</th>
-<th align="center">a|b</th>
-<th align="center">!a</th>
-<th align="center">a||b</th>
-<th align="center">a&amp;&amp;b</th>
-<th align="center">a^b</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">false</td>
-</tr>
-<tr>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">true</td>
-</tr>
-<tr>
-<td align="center">false</td>
-<td align="center">false</td>
-<td align="center">false</td>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">false</td>
-<td align="center">false</td>
-</tr>
-<tr>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">true</td>
-<td align="center">false</td>
-<td align="center">true</td>
-</tr>
-</tbody></table>
-<p><strong>说明：逻辑运算符操作的都是boolean类型的变量（位运算中也有&amp;、|、^，区别在于逻辑运算符操作的是boolean类型的变量，位运算符操作的是数值类型）。</strong></p>
-<p><strong>区分 &amp; 与 &amp;&amp;</strong></p>
-<p>相同点：</p>
-<ol>
-<li>运算结果相同</li>
-<li>当符号左边是true时，都会执行符号右边的内容</li>
-</ol>
-<p>不同点：</p>
-<ol>
-<li>当符号左边是false时，&amp;&amp;不会执行符号右边的内容</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> b1 = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(b1 &amp; (num1++ &gt; <span class="number">0</span>))&#123;     <span class="comment">//逻辑与会判断</span></span><br><span class="line">    System.out.println(<span class="string">&quot;我在北京&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在南京&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">System.out.println(num1);    <span class="comment">//11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> b2 = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(b2 &amp;&amp; (num2++ &gt; <span class="number">0</span>))&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在北京&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在南京&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">System.out.println(num2);    <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>区分 | 与 ||</strong></p>
-<p>相同点：</p>
-<ol>
-<li>运算结果相同</li>
-<li>当符号左边是false时，都会执行符号右边的内容</li>
-</ol>
-<p>不同点：</p>
-<ol>
-<li>当符号左边是true时，||不会执行符号右边的内容</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> b1 = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(b1 | (num1++ &gt; <span class="number">0</span>))&#123;     <span class="comment">//逻辑与会判断</span></span><br><span class="line">    System.out.println(<span class="string">&quot;我在北京&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在南京&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">System.out.println(num1);    <span class="comment">//11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> b2 = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(b2 || (num2++ &gt; <span class="number">0</span>))&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在北京&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我在南京&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">System.out.println(num2);    <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>练习：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>(x++ == <span class="number">2</span> &amp; ++y == <span class="number">2</span>)&#123;</span><br><span class="line">    x = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;x = &quot;</span> + x + <span class="string">&quot;y = &quot;</span> + y);  <span class="comment">//x = 2 ,y = 2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>(x++ == <span class="number">2</span> &amp;&amp; ++y == <span class="number">2</span>)&#123;</span><br><span class="line">    x = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;x = &quot;</span> + x + <span class="string">&quot;y = &quot;</span> + y);  <span class="comment">//x = 2 ,y = 1</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>(x++ == <span class="number">1</span> | ++y == <span class="number">1</span>)&#123;</span><br><span class="line">    x = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;x = &quot;</span> + x + <span class="string">&quot;y = &quot;</span> + y);  <span class="comment">//x = 7 ,y = 2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>(x++ == <span class="number">1</span> || ++y == <span class="number">1</span>)&#123;</span><br><span class="line">    x = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;x = &quot;</span> + x + <span class="string">&quot;y = &quot;</span> + y);  <span class="comment">//x = 7 ,y = 1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>z 的结果为：46</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> x = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">boolean</span> y = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">short</span> z = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">if</span>((z++ == <span class="number">42</span>) &amp;&amp; (y == <span class="keyword">true</span>))</span><br><span class="line">    z++;</span><br><span class="line"><span class="keyword">if</span>((x == <span class="keyword">false</span>) || (++z == <span class="number">45</span>))</span><br><span class="line">    z++;</span><br><span class="line">System.out.println(<span class="string">&quot;z = &quot;</span> + z);</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><ul>
-<li><strong>位运算符是直接对整数的二进制进行的运算</strong></li>
-<li>左移 ： 在一定范围内，每向左移一位，相当于 * 2</li>
-<li>右移 ： 在一定范围内，每向右移一位，相当于  / 2</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">运算</th>
-<th align="center">范例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&lt;&lt;</td>
-<td align="center">左移(==高位丢弃，空位补0==)</td>
-<td align="center">3 &lt;&lt; 2 = 12 —&gt; 3 * 2 * 2 = 12</td>
-</tr>
-<tr>
-<td align="center">&gt;&gt;</td>
-<td align="center">右移(==若高位是0，右移后，空位补0；若高位是1，右移后，空位补1==)</td>
-<td align="center">3 &gt;&gt; 1 = 1 —&gt; 3 / 2 = 1</td>
-</tr>
-<tr>
-<td align="center">&gt;&gt;&gt;</td>
-<td align="center">无符号右移(==无论高位是0或1，空位都补0==)</td>
-<td align="center">3 &gt;&gt;&gt; 1 = 1 —&gt; 3 / 2 = 1</td>
-</tr>
-<tr>
-<td align="center">&amp;</td>
-<td align="center">与运算</td>
-<td align="center">6 &amp; 3 = 2</td>
-</tr>
-<tr>
-<td align="center">|</td>
-<td align="center">或运算</td>
-<td align="center">6 | 3 = 7</td>
-</tr>
-<tr>
-<td align="center">^</td>
-<td align="center">异或运算</td>
-<td align="center">6 ^ 3 = 5</td>
-</tr>
-<tr>
-<td align="center">~</td>
-<td align="center">取反运算</td>
-<td align="center">~6 = -7</td>
-</tr>
-</tbody></table>
-<p><strong>思考</strong>：最高效的方式计算  8 * 2 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">2</span>;</span><br><span class="line">num &lt;&lt; <span class="number">3</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">int num = 8;</span></span><br><span class="line"><span class="comment">num &lt;&lt; 1;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>练习：</strong>交换两个变量的值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-
-<p>方式一：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">temp = num1;</span><br><span class="line">num1 = num2;</span><br><span class="line">num2 = temp;</span><br></pre></td></tr></table></figure>
-
-<p>方式二：</p>
-<p>好处：不用定义变量</p>
-<p>弊端：</p>
-<ol>
-<li>可能超出存储范围</li>
-<li>有局限性（不同数据类型）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num1 = num1 + num2;</span><br><span class="line">num2 = num1 - num2;</span><br><span class="line">num1 = num1 - num2</span><br></pre></td></tr></table></figure>
-
-<p>方式三：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num1 = num1 ^ num2;</span><br><span class="line">num2 = num1 ^ num2;</span><br><span class="line">num1 = num1 ^ num2;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><ol>
-<li>**格式： ==(条件表达式) ? 表达式1 : 表达式2== **</li>
-<li>表达式1与表达式2是同种类型</li>
-<li>三元运算符与 if-else 的联系与区别<ul>
-<li>三元运算符可简化 if - else 语句</li>
-<li>三元运算符要求必须返回一个值</li>
-<li>if-else 代码块可以有多个语句</li>
-</ul>
-</li>
-<li>三元运算符可以嵌套使用</li>
-<li>凡是使用三元运算符的地方都可以改写成if-else语句，反之，不成立。</li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><h3 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a>运算符的优先级</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="left">优先级</th>
-<th align="left">运算符</th>
-<th align="left">结合性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left">()、[]、{}</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left">!、+、-、~、++、–</td>
-<td align="left">从右向左</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td align="left">*、/、%</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td align="left">+、-</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td align="left">«、»、&gt;&gt;&gt;</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">6</td>
-<td align="left">&lt;、&lt;=、&gt;、&gt;=、instanceof</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">7</td>
-<td align="left">==、!=</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">8</td>
-<td align="left">&amp;</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">9</td>
-<td align="left">^</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">10</td>
-<td align="left">|</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">11</td>
-<td align="left">&amp;&amp;</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">12</td>
-<td align="left">||</td>
-<td align="left">从左向右</td>
-</tr>
-<tr>
-<td align="left">13</td>
-<td align="left">?:</td>
-<td align="left">从右向左</td>
-</tr>
-<tr>
-<td align="left">14</td>
-<td align="left">=、+=、-=、*=、/=、&amp;=、|=、^=、~=、«=、»=、&gt;&gt;&gt;=</td>
-<td align="left">从右向左</td>
-</tr>
-</tbody></table>
-<p>==<strong>注意：只有单目运算、赋值运算、三元运算符是从右向左运算的</strong>==</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/30/Java%E8%BF%90%E7%AE%97%E7%AC%A6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
