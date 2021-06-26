@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;rhc-rgb.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
-<meta name="description" content="编写一个函数，随机输入包含20个元素的序列，大于50的元素放入到字典1中，小于50的元素放在字典2中，并计算字典1和字典2中元素的个数。">
+<meta name="description" content="显示命令 显示数据库 mysql  -&gt;  show databases;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="练习">
-<meta property="og:url" content="https://rhc-rgb.github.io/2021/06/22/%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:title" content="mysql基本命令操作">
+<meta property="og:url" content="https://rhc-rgb.github.io/2021/06/25/mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="不知名的呆毛🍃">
-<meta property="og:description" content="编写一个函数，随机输入包含20个元素的序列，大于50的元素放入到字典1中，小于50的元素放在字典2中，并计算字典1和字典2中元素的个数。">
+<meta property="og:description" content="显示命令 显示数据库 mysql  -&gt;  show databases;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-22T01:04:15.000Z">
-<meta property="article:modified_time" content="2021-06-22T01:17:00.659Z">
+<meta property="article:published_time" content="2021-06-25T01:23:05.000Z">
+<meta property="article:modified_time" content="2021-06-26T03:57:22.484Z">
 <meta property="article:author" content="任红昌">
-<meta property="article:tag" content="计算机,学习,Java,博客">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://rhc-rgb.github.io/2021/06/22/%E7%BB%83%E4%B9%A0/">
+<link rel="canonical" href="https://rhc-rgb.github.io/2021/06/25/mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;rhc-rgb.github.io&#x2F;2021&#x2F;06&#x2F;22&#x2F;%E7%BB%83%E4%B9%A0&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;22&#x2F;练习&#x2F;&quot;,&quot;title&quot;:&quot;练习&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;rhc-rgb.github.io&#x2F;2021&#x2F;06&#x2F;25&#x2F;mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;25&#x2F;mysql基本命令操作&#x2F;&quot;,&quot;title&quot;:&quot;mysql基本命令操作&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>练习 | 不知名的呆毛🍃</title><script src="/js/config.js"></script>
+<title>mysql基本命令操作 | 不知名的呆毛🍃</title><script src="/js/config.js"></script>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -107,7 +107,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -120,6 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">显示命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">创建和删除命令</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -179,7 +180,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://rhc-rgb.github.io/2021/06/22/%E7%BB%83%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://rhc-rgb.github.io/2021/06/25/mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -192,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          练习
+          mysql基本命令操作
         </h1>
 
         <div class="post-meta-container">
@@ -202,10 +203,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-06-22 09:04:15 / Modified: 09:17:00" itemprop="dateCreated datePublished" datetime="2021-06-22T09:04:15+08:00">2021-06-22</time>
+      <time title="Created: 2021-06-25 09:23:05" itemprop="dateCreated datePublished" datetime="2021-06-25T09:23:05+08:00">2021-06-25</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-26 11:57:22" itemprop="dateModified" datetime="2021-06-26T11:57:22+08:00">2021-06-26</time>
+      </span>
 
   
 </div>
@@ -217,11 +224,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>编写一个函数，随机输入包含20个元素的序列，大于50的元素放入到字典1中，小于50的元素放在字典2中，并计算字典1和字典2中元素的个数。</p>
-<span id="more"></span>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner re = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">20</span>];</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入20个整数:&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">20</span>;i++) &#123;</span><br><span class="line">			arr[i] = re.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//定义集合用于存储大于50的数字</span></span><br><span class="line">		List num1 = <span class="keyword">new</span> ArrayList();   </span><br><span class="line">		<span class="comment">//定义集合用于存储小于50的数字</span></span><br><span class="line">		List num2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将大于50和小于50的数分别存储在两个集合中</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">20</span>;i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i] &gt; <span class="number">50</span>) &#123;</span><br><span class="line">				num1.add(arr[i]);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				num2.add(arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出大于50的元素</span></span><br><span class="line">		System.out.println(<span class="string">&quot;大于50的元素\n&quot;</span> + num1.toString());</span><br><span class="line">		<span class="comment">//输出小于50的元素</span></span><br><span class="line">		System.out.println(<span class="string">&quot;小于50的元素\n&quot;</span> + num2.toString());</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取元素个数</span></span><br><span class="line">		System.out.println(<span class="string">&quot;大于50的元素有&quot;</span> + num1.size() + <span class="string">&quot;个&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;小于50的元素有&quot;</span> + num2.size() + <span class="string">&quot;个&quot;</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+        <h4 id="显示命令"><a href="#显示命令" class="headerlink" title="显示命令"></a>显示命令</h4><ol>
+<li><p>显示数据库</p>
+<p>mysql  -&gt;  show databases;</p>
+<span id="more"></span></li>
+<li><p>使用数据库</p>
+<p>mysql  -&gt;  use databasename;</p>
+<p>说明：databasename是自己命名的数据库名字</p>
+</li>
+<li><p>显示表格</p>
+<p>show tables;</p>
+</li>
+<li><p>显示表格结构</p>
+<p>describe tablename；</p>
+<p>说明：tablename是自己命名的数据表名字</p>
+</li>
+</ol>
+<h4 id="创建和删除命令"><a href="#创建和删除命令" class="headerlink" title="创建和删除命令"></a>创建和删除命令</h4><ol>
+<li><p>建库</p>
+<p>CREATE DATABASE 库名;</p>
+</li>
+<li><p>建表</p>
+<p>use 库名；</p>
+<p>create table 表名；</p>
+</li>
+<li><p>删库和删表</p>
+<p>drop database 库名；</p>
+<p>drop database 表名；</p>
+</li>
+<li><p>将表中记录清空</p>
+<p>delete from 表名；</p>
+</li>
+<li><p>显示表中记录</p>
+<p>select * from 表名；</p>
+</li>
+</ol>
 
     </div>
 
@@ -230,19 +267,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/06/02/windows10%E5%AE%B6%E5%BA%AD%E4%B8%AD%E6%96%87%E7%89%88%E5%BC%80%E5%90%AFAdministrator%E7%94%A8%E6%88%B7/" rel="prev" title="windows10家庭中文版开启Administrator用户">
-                  <i class="fa fa-chevron-left"></i> windows10家庭中文版开启Administrator用户
+                <a href="/2021/06/22/%E7%BB%83%E4%B9%A0/" rel="prev" title="练习">
+                  <i class="fa fa-chevron-left"></i> 练习
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/25/mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" rel="next" title="mysql基本命令操作">
-                  mysql基本命令操作 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
