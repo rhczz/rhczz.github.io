@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;rhc-rgb.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
+<meta name="description" content="printf规格化123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990&#x2F;** print : 标准输出；* p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="printf规格化">
+<meta property="og:url" content="https://rhc-rgb.github.io/2021/07/22/printf%E8%A7%84%E6%A0%BC%E5%8C%96/index.html">
+<meta property="og:site_name" content="不知名的呆毛🍃">
+<meta property="og:description" content="printf规格化123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990&#x2F;** print : 标准输出；* p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-22T10:58:52.000Z">
+<meta property="article:modified_time" content="2021-07-22T11:05:17.905Z">
+<meta property="article:author" content="任红昌">
+<meta property="article:tag" content="计算机,学习,Java,博客">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://rhc-rgb.github.io/2021/07/22/printf%E8%A7%84%E6%A0%BC%E5%8C%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;rhc-rgb.github.io&#x2F;2021&#x2F;07&#x2F;22&#x2F;printf%E8%A7%84%E6%A0%BC%E5%8C%96&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;22&#x2F;printf规格化&#x2F;&quot;,&quot;title&quot;:&quot;printf规格化&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>printf规格化 | 不知名的呆毛🍃</title><script src="/js/config.js"></script>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?aab9aeae656e4221c3804d0b55290b89"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">不知名的呆毛🍃</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">任红昌的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#printf%E8%A7%84%E6%A0%BC%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">printf规格化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="任红昌"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">任红昌</p>
+  <div class="site-description" itemprop="description">欢迎光临我的小星球</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rhc-rgb.github.io/2021/07/22/printf%E8%A7%84%E6%A0%BC%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="任红昌">
+      <meta itemprop="description" content="欢迎光临我的小星球">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知名的呆毛🍃">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          printf规格化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-22 18:58:52 / Modified: 19:05:17" itemprop="dateCreated datePublished" datetime="2021-07-22T18:58:52+08:00">2021-07-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="printf规格化"><a href="#printf规格化" class="headerlink" title="printf规格化"></a>printf规格化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* print : 标准输出；</span></span><br><span class="line"><span class="comment">* println ： 输出；换行</span></span><br><span class="line"><span class="comment">* printf ： 主要是继承了 C 语言的一些特征，jdk1.5 之后出现</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* printf(&quot;输出的格式&quot; , &quot;可变长的，表示输出的数据对象&quot;)</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 格式字符</span></span><br><span class="line"><span class="comment">* ①%：表示格式说明的起始符号，不可缺少。</span></span><br><span class="line"><span class="comment">* ②-：有-表示左对齐输出，如省略表示右对齐输出。</span></span><br><span class="line"><span class="comment">* ③0：有0表示指定空位填0,如省略表示指定空位不填。</span></span><br><span class="line"><span class="comment">* ④m.n：m指域宽，即对应的输出项在输出设备上所占的字符数。N指精度。用于说明输出的实型数的小数位数。为指定n时，隐含的精度为n=6位。</span></span><br><span class="line"><span class="comment">* ⑤l或h:l对整型指long型，对实型指double型。h用于将整型的格式字符修正为short型。</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* ①d格式：用来输出十进制整数。有以下几种用法：</span></span><br><span class="line"><span class="comment">*       %d：按整型数据的实际长度输出。</span></span><br><span class="line"><span class="comment">*       %md：m为指定的输出字段的宽度。如果数据的位数小于m，则左端补以空格，若大于m，则按实际位数输出。</span></span><br><span class="line"><span class="comment">*       %ld：输出长整型数据。</span></span><br><span class="line"><span class="comment">* ②o格式：以无符号八进制形式输出整数。对长整型可以用&quot;%lo&quot;格式输出。同样也可以指定字段宽度用“%mo”格式输出。</span></span><br><span class="line"><span class="comment">* ③x格式：以无符号十六进制形式输出整数。对长整型可以用&quot;%lx&quot;格式输出。同样也可以指定字段宽度用&quot;%mx&quot;格式输出。</span></span><br><span class="line"><span class="comment">* ④u格式：以无符号十进制形式输出整数。对长整型可以用&quot;%lu&quot;格式输出。同样也可以指定字段宽度用“%mu”格式输出。 //不可使用  //在实践中没有运行出来。</span></span><br><span class="line"><span class="comment">* ⑤c格式：输出一个字符。</span></span><br><span class="line"><span class="comment">* ⑥s格式：用来输出一个串。有几中用法</span></span><br><span class="line"><span class="comment">*       %s：例如:printf(&quot;%s&quot;, &quot;CHINA&quot;)输出&quot;CHINA&quot;字符串（不包括双引号）。</span></span><br><span class="line"><span class="comment">*       %ms：输出的字符串占m列，如字符串本身长度大于m，则突破获m的限制,将字符串全部输出。若串长小于m，则左补空格。</span></span><br><span class="line"><span class="comment">*       %-ms：如果串长小于m，则在m列范围内，字符串向左靠，右补空格。</span></span><br><span class="line"><span class="comment">*       %m.ns：输出占m列，但只取字符串中左端n个字符。这n个字符输出在m列的右侧，左补空格。</span></span><br><span class="line"><span class="comment">*       %-m.ns：其中m、n含义同上，n个字符输出在m列范围的左侧，右补空格。如果n&gt;m，则自动取n值，即保证n个字符正常输出。</span></span><br><span class="line"><span class="comment">* ⑦f格式：用来输出实数（包括单、双精度），以小数形式输出。有以下几种用法：</span></span><br><span class="line"><span class="comment">*       %f：不指定宽度，整数部分全部输出并输出6位小数。</span></span><br><span class="line"><span class="comment">*       %m.nf：输出共占m列，其中有n位小数，如数值宽度小于m左端补空格。</span></span><br><span class="line"><span class="comment">*       %-m.nf：输出共占m列，其中有n位小数，如数值宽度小于m右端补空格。</span></span><br><span class="line"><span class="comment">* ⑧e格式：以指数形式输出实数。可用以下形式：//在实践中没有运行出来。</span></span><br><span class="line"><span class="comment">*       %e：数字部分（又称尾数）输出6位小数，指数部分占5位或4位。</span></span><br><span class="line"><span class="comment">*       %m.ne和%-m.ne：m、n和”-”字符含义与前相同。此处n指数据的数字部分的小数位数，m表示整个输出数据所占的宽度。</span></span><br><span class="line"><span class="comment">* ⑨g格式：自动选f格式或e格式中较短的一种输出，且不输出无意义的零。</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintfTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//输出字符串</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%s&quot;</span>,<span class="string">&quot;你好\n&quot;</span>);</span><br><span class="line">        <span class="comment">//转大写</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%S\n&quot;</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.printf(<span class="string">&quot;%5s&quot;</span>,<span class="string">&quot;qwe\n&quot;</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%-5s&quot;</span>,<span class="string">&quot;qwe\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.printf(<span class="string">&quot;%5.3s\n&quot;</span>,<span class="string">&quot;qweaa&quot;</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%-5.3s\n&quot;</span>,<span class="string">&quot;qweaa&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1$ 表示输出的第一个输出 2$表示第二个输出 ...</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%1$s = %3$s %2$s\n&quot;</span>,<span class="string">&quot;name&quot;</span>,<span class="string">&quot;san&quot;</span>,<span class="string">&quot;zhang&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出整数</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%d\n&quot;</span>,<span class="number">5</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%2d\n&quot;</span>,<span class="number">553</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%5d\n&quot;</span>,<span class="number">553</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%-5d\n&quot;</span>,<span class="number">553</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> a = <span class="number">10034L</span>;</span><br><span class="line">        System.out.printf(<span class="string">&quot;%1d\n&quot;</span>,a);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">123</span>;</span><br><span class="line">        <span class="comment">//以八进制输出</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%o\n&quot;</span>,b);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%1o\n&quot;</span>,b);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%31o\n&quot;</span>,b);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//以十六进制输出</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%x\n&quot;</span>,b);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%1x\n&quot;</span>,b);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%31x\n&quot;</span>,b);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出一个字符</span></span><br><span class="line">        System.out.printf(<span class="string">&quot;%c\n&quot;</span>,<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出浮点型</span></span><br><span class="line">        <span class="keyword">float</span> e = <span class="number">2.35555F</span>;</span><br><span class="line">        <span class="keyword">double</span> h = <span class="number">3.55555</span>;</span><br><span class="line">        System.out.printf(<span class="string">&quot;%f\n&quot;</span>,e);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%f\n&quot;</span>,h);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%4.3f\n&quot;</span>,h);</span><br><span class="line">        System.out.printf(<span class="string">&quot;%-4.3f\n&quot;</span>,h);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//科学计数法输出浮点数</span></span><br><span class="line">        <span class="keyword">double</span> i = <span class="number">1000</span>;</span><br><span class="line">        System.out.printf(<span class="string">&quot;%1.3e\n&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/java8%E4%B8%AD%E6%8E%A5%E5%8F%A3%E6%96%B0%E7%89%B9%E6%80%A7/" rel="prev" title="java8中接口新特性">
+                  <i class="fa fa-chevron-left"></i> java8中接口新特性
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/22/String%E5%92%8CStringBuffer/" rel="next" title="String和StringBuffer">
+                  String和StringBuffer <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">任红昌</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

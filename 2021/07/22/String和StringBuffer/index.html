@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;rhc-rgb.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
+<meta name="description" content="String类与StringBuffer在Java中，由于&#x3D;&#x3D;String类是final类型&#x3D;&#x3D;的，所以使用&#x3D;&#x3D;String定义的字符串&#x3D;&#x3D;是一个常量，因此它一旦创建，&#x3D;&#x3D;其内容和长度是不可改变的&#x3D;&#x3D;。如果需要对一个字符串进行修改，则只能创建新的字符串。 &#x3D;&#x3D;StringBuffer类&#x3D;&#x3D;和String类最大的区别在于它的&#x3D;&#x3D;内容和长度都是可以改变&#x3D;&#x3D;的。StringBuffer类似一个字符容器，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String和StringBuffer">
+<meta property="og:url" content="https://rhc-rgb.github.io/2021/07/22/String%E5%92%8CStringBuffer/index.html">
+<meta property="og:site_name" content="不知名的呆毛🍃">
+<meta property="og:description" content="String类与StringBuffer在Java中，由于&#x3D;&#x3D;String类是final类型&#x3D;&#x3D;的，所以使用&#x3D;&#x3D;String定义的字符串&#x3D;&#x3D;是一个常量，因此它一旦创建，&#x3D;&#x3D;其内容和长度是不可改变的&#x3D;&#x3D;。如果需要对一个字符串进行修改，则只能创建新的字符串。 &#x3D;&#x3D;StringBuffer类&#x3D;&#x3D;和String类最大的区别在于它的&#x3D;&#x3D;内容和长度都是可以改变&#x3D;&#x3D;的。StringBuffer类似一个字符容器，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-22T10:59:11.000Z">
+<meta property="article:modified_time" content="2021-07-22T11:05:46.753Z">
+<meta property="article:author" content="任红昌">
+<meta property="article:tag" content="Sting">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://rhc-rgb.github.io/2021/07/22/String%E5%92%8CStringBuffer/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;rhc-rgb.github.io&#x2F;2021&#x2F;07&#x2F;22&#x2F;String%E5%92%8CStringBuffer&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;22&#x2F;String和StringBuffer&#x2F;&quot;,&quot;title&quot;:&quot;String和StringBuffer&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>String和StringBuffer | 不知名的呆毛🍃</title><script src="/js/config.js"></script>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?aab9aeae656e4221c3804d0b55290b89"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">不知名的呆毛🍃</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">任红昌的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#String%E7%B1%BB%E4%B8%8EStringBuffer"><span class="nav-number">1.</span> <span class="nav-text">String类与StringBuffer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#String%E7%B1%BB%E5%92%8CStringBuffer%E7%B1%BB%E7%9A%84%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">String类和StringBuffer类的对比分析：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="任红昌"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">任红昌</p>
+  <div class="site-description" itemprop="description">欢迎光临我的小星球</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rhc-rgb.github.io/2021/07/22/String%E5%92%8CStringBuffer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="任红昌">
+      <meta itemprop="description" content="欢迎光临我的小星球">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知名的呆毛🍃">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          String和StringBuffer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-22 18:59:11 / Modified: 19:05:46" itemprop="dateCreated datePublished" datetime="2021-07-22T18:59:11+08:00">2021-07-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="String类与StringBuffer"><a href="#String类与StringBuffer" class="headerlink" title="String类与StringBuffer"></a>String类与StringBuffer</h1><p>在Java中，由于==String类是final类型==的，所以使用==String定义的字符串==是一个常量，因此它一旦创建，==其内容和长度是不可改变的==。如果需要对一个字符串进行修改，则只能创建新的字符串。</p>
+<p>==StringBuffer类==和String类最大的区别在于它的==内容和长度都是可以改变==的。StringBuffer类似一个字符容器，当在其中添加或删除字符时，所操作的都是这个字符容器，因此并==不会产生新的StringBuffer对象==。</p>
+<span id="more"></span>
+
+<p><strong>String类常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>StringBuffer append(char c)</th>
+<th>添加字符到StringBuffer对象中末尾</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>StringBuffer insert(int offset,String str)</td>
+<td>在StringBuffer对象中的offset位置插入字符串str</td>
+</tr>
+<tr>
+<td>StringBuffer deleteCharAt(int index)</td>
+<td>移除StringBuffer对象中指定位置的字符</td>
+</tr>
+<tr>
+<td>StringBuffer delete(int start,int end)</td>
+<td>删除StringBuffer对象中指定范围的字符或字符串</td>
+</tr>
+<tr>
+<td>StringBuffer replace(int start,int end,String s)</td>
+<td>将StringBuffer对象中指定范围的字符或字符串用新的字符串s进行替换</td>
+</tr>
+<tr>
+<td>void setCharAt(int index, char ch)</td>
+<td>修改指定位置index处的字符</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回StringBuffer缓冲区中的字符串对象</td>
+</tr>
+<tr>
+<td>StringBuffer reverse()</td>
+<td>将此StringBuffer对象用其反转形式取代</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//反转</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;fsdfasfasd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line">        <span class="comment">//将StringBuffer的字符串内容反转</span></span><br><span class="line">        stringBuffer.reverse();</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;fdsofjasdsfd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除StringBuffer对象中的指定开始和结束的字符串   指定位置为前包后不包 [2,5)</span></span><br><span class="line">        stringBuffer.delete(<span class="number">2</span>,<span class="number">5</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除StringBuffer对象中指定位置的字符</span></span><br><span class="line">        stringBuffer.deleteCharAt(<span class="number">4</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//清空缓冲区</span></span><br><span class="line">        stringBuffer.delete(<span class="number">0</span>,stringBuffer.length());</span><br><span class="line">        System.out.println(<span class="string">&quot;清空&quot;</span> + stringBuffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//修改</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将指定位置字符替换</span></span><br><span class="line">        stringBuffer.setCharAt(<span class="number">4</span>,<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将指定开始和结束的字符串替换</span></span><br><span class="line">        stringBuffer.replace(<span class="number">3</span>,<span class="number">6</span>,<span class="string">&quot;asdfg&quot;</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加字符串到stringBuffer末尾</span></span><br><span class="line">        stringBuffer.append(<span class="string">&quot;ABC&quot;</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//在StringBuffer指定位置插入字符串</span></span><br><span class="line">        stringBuffer.insert(<span class="number">2</span>,<span class="string">&quot;fdsf&quot;</span>);</span><br><span class="line">        System.out.println(stringBuffer);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="String类和StringBuffer类的对比分析："><a href="#String类和StringBuffer类的对比分析：" class="headerlink" title="String类和StringBuffer类的对比分析："></a>String类和StringBuffer类的对比分析：</h5><ul>
+<li>==String类==定义的字符串是常量，一旦创建后，==内容和长度都无法改变==。==StringBuffer==表示字符容器，其==内容和长度是可以改变==的。</li>
+<li>==String类重写了Object类的equals()方法==，==而StringBuffer类没有重写Object类的equals()方==法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//StringBuffer没有重写equals()方法</span></span><br><span class="line">        String a = <span class="keyword">new</span> String(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        String b = <span class="keyword">new</span> String(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        System.out.println(a.equals(b));   <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">        StringBuffer c = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        StringBuffer d = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        System.out.println(c.equals(d));    <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// + 在String和StringBuffer中的区别</span></span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">        System.out.println(str1 + str2);   <span class="comment">//ab</span></span><br><span class="line"></span><br><span class="line">        StringBuffer strb1 = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        StringBuffer strb2 = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">        <span class="comment">//strb1 + strb2 ❌      StringBuffer不能使用 + 连接符</span></span><br><span class="line"></span><br><span class="line">        System.out.println(a == b);  <span class="comment">//false</span></span><br><span class="line">        System.out.println(c == d);  <span class="comment">//false</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>StringBuilder</strong></p>
+<p>除了StringBuffer的使用，在JDK1.5之后提供了一个StringBuilder类，同样可以对字符串进行操作。</p>
+<p><strong>主要区别：</strong>二者不同的是==StringBuffer是线程安全的，而StringBuilder没有实现线程安全功能，所以性能略高==。通常情况下，如果创建一个内容可变的字符串对象优先考虑StringBuilder。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Sting/" rel="tag"># Sting</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/printf%E8%A7%84%E6%A0%BC%E5%8C%96/" rel="prev" title="printf规格化">
+                  <i class="fa fa-chevron-left"></i> printf规格化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/22/%E6%AF%94%E8%BE%83%E5%99%A8/" rel="next" title="比较器">
+                  比较器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">任红昌</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
